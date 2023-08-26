@@ -1,2 +1,2 @@
-# inferno2
+# inferno
  
