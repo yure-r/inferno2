@@ -1,0 +1,1761 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-7SYLWGZYJ2"></script> -->
+<script>
+//   window.dataLayer = window.dataLayer || [];
+//   function gtag(){dataLayer.push(arguments);}
+//   gtag('js', new Date());
+
+//   gtag('config', 'G-7SYLWGZYJ2');
+</script>
+
+<title>Embed - Shadertoy BETA</title>
+<meta charset="utf-8" />
+<meta name="Keywords" content="shadertoy, shader toy, quilez, inigo, jeremias, pol, fractals, demoscene, computer graphics, mathematics, rendering, demo, 3D, realtime, shader, raytracing, raymarching, webgl, glsl" />
+<meta name="Description" content="Build shaders, share them, and learn from the best community." />
+<meta name="Author" content="Beautypi" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="image_src" href="https://www.shadertoy.com/img/logo.png" />
+<link rel="apple-touch-icon" href="/img/launch_icon_57.png"/>
+<link rel="apple-touch-icon" sizes="72x72" href="/img/launch_icon_72.png"/>
+<link rel="apple-touch-icon" sizes="114x114" href="/img/launch_icon_114.png"/>
+<link rel="shortcut icon" href="/img/favicon.ico"/>
+
+<style>::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: #404040;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background: #909090;
+    border-radius: 0ex;
+}
+
+::-webkit-scrollbar-corner
+{
+    background: #000;
+}
+
+::-webkit-input-placeholder
+{
+	font-style:italic;
+}
+input:-moz-placeholder, textarea:-moz-placeholder
+{
+	font-style:italic;
+}
+input.placeholder-text, textarea.placeholder-text
+{
+	font-style:italic;
+}
+
+pre 
+{
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+@font-face
+{
+    font-family: Lobster;
+    src: url("/img/lobster.otf") format("opentype");
+}
+
+div#centerScreen
+{
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
+
+a.headerLinks:hover
+{
+    background-color:#505050;
+    color : #ff8020;
+}
+
+body
+{
+    color: #000000;
+    font-size:12px;
+    font-style:normal;
+    font-family:Tahoma,Arial;
+    background-repeat: no-repeat;
+    //background-attachment: fixed;
+    padding:0px;
+    margin:0px;
+    text-align: left;
+    background-color: #d0d0d0;
+    background-repeat: repeat;
+    user-select: text;
+}
+
+a,
+a:hover,
+a:visited
+{
+  color : inherit;
+}
+
+div#content {
+    width: 95%;
+    overflow: hidden;
+    margin: auto;
+    padding: 0px;
+    min-height: calc(100vh - 80px);
+    //box-sizing: border-box;
+}
+
+
+.notificationCount
+{
+ background-color:#ff0000;
+ padding-left:3px;
+ padding-right:1px;
+ padding-top:1px;
+ padding-bottom:1px;
+}
+
+div#header
+{
+    background-color: #404040;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    display: flex;
+    flex-direction:row;
+}
+
+#headerBlock1
+{
+    width: 50%;
+    display:flex;
+    align-items:center;
+}
+
+a#headerTitle
+{
+    font-size: 2.25em;
+    font-family: Lobster,Tahoma,Arial;
+    text-decoration: none;
+    padding-left:32px;
+    padding-right:32px;
+}
+
+#headerSearch
+{
+    display: inline-block;
+    color: #000000;
+    width: 300px;
+}
+
+input[type=search]#mySearch
+{
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid black;
+    padding:12px;
+}
+
+#headerBlock2
+{
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+a#headerTitle:hover
+{
+    color : #ff8020;
+}
+
+a.headerLinks
+{
+    font-weight: bold;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin:0px;
+    text-decoration: none;
+    transition: background-color 0.15s linear, color 0.15s linear;
+}
+
+#footer
+{
+    background-color: rgba(64,64,64,0.25);
+    color: #000000;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#footer div
+{
+    padding-top:10px;
+    padding-bottom:0px;
+    padding-left:16px;
+    padding-right:16px;
+}
+
+#footer div ul
+{
+    margin-left:0px;
+    padding-left:16px;
+}
+
+#footer div ul li
+{
+    padding-top:6px;
+}
+
+a.regular
+{
+    font-weight:bold;
+    text-decoration:none
+}
+
+a.regular:hover
+{
+  color : #ff8020;
+}
+
+a.user
+{
+    font-weight:bold;
+    text-decoration:none;
+}
+
+a.user:hover
+{
+  color : #ff8020;
+  text-decoration: underline;
+}
+
+.uiButton
+{
+    border: none;
+    outline: none;
+    margin: 0px;
+    padding: 0px;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.uiButton:hover
+{
+    box-shadow: inset 0px 0px 1px 1px #808080, 0px 0px 1px 1px #808080;
+}
+
+.uiDivBUtton
+{
+    cursor:pointer;
+}
+
+.uiDivBUtton:hover
+{
+    color: #ffffff;
+}
+
+
+.dialog
+{
+    display: block;
+    background-color: #e0e0e0;
+    color: #000000;
+    border:1px solid #000;
+    padding:0px;
+    margin:0px;
+    text-align:left;
+    border-radius: 4px;
+    box-shadow:4px 4px 6px 0px rgba(0,0,0,0.5);
+    overflow: hidden;
+    z-index:1000;
+    visibility: hidden;
+    opacity:0;
+    -moz-transition: opacity 0.25s linear,visibility 0.25s linear;
+    -webkit-transition: opacity 0.25s linear,visibility 0.25s linear;
+    transition: opacity 0.25s linear,visibility 0.25s linear;
+}
+
+.dialogHeader
+{
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:32px;
+    position: absolute;
+    background-color: #808080;
+    cursor:move;
+}
+
+.dialogTitle
+{
+    left: 12px;
+    top: 4px;
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    color:#000000;
+    font-size:1.5em;
+    text-align: left;
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+}
+
+.dialogOverlay
+{
+    z-index:1000;
+
+    visibility: hidden;
+    opacity:0;
+    -moz-transition: opacity 0.25s linear,visibility 0.25s linear;
+    -webkit-transition: opacity 0.25s linear,visibility 0.25s linear;
+    transition: opacity 0.25s linear,visibility 0.25s linear;
+
+    left:0px;
+    top:0px;
+    padding:0px;
+    margin:0px;
+    width:100%;
+    height:100%;
+    position:absolute;
+
+    background-color:rgba(0,0,0,.4);
+}
+
+.viewsIcon, .likesIcon
+{
+    border: none;
+    outline: none;
+    display:inline-block;
+    background-repeat:no-repeat;
+    top:0px;
+    left:0px;
+    padding:0px;
+    padding-right: 2px;
+    margin:0px;
+    position:relative;
+}
+
+.userPictureSmall
+{
+    background-color:#808080;
+    border: 1px solid #000000;
+    width:32px;
+    height:32px;
+}
+
+.dialogCloseButton
+{
+    right:8px;
+    top: 4px;
+    width:22px;
+    height:22px;
+    position: absolute;
+    background-image: url("/img/close.png");
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dialogCloseButton:hover
+{
+    box-shadow: inset 0px 0px 4px 2px #ffffff, 0px 0px 4px 2px #ffffff;
+}
+
+.dialogContentButtons
+{
+     padding:0;
+     border:0;
+     text-align: justify;
+     left: 24px;
+     bottom:40px;
+     position:absolute;
+}
+
+.dialogButton
+{
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-bottom:5px;
+    padding-top:4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left:4px;
+    margin-right:4px;
+    text-decoration: none;
+    color:#000000;
+    width: 80px;
+    -moz-transition:    background-color 0.15s linear, color 0.15s linear;
+    -webkit-transition: background-color 0.15s linear, color 0.15s linear;
+    transition:         background-color 0.15s linear, color 0.15s linear;
+}
+
+.dialogButton:hover
+{
+  background-color:#808080;
+  color : #ff8020;
+}
+
+.dialogCloseButton:hover
+{
+    box-shadow: inset 0px 0px 4px 2px #ffffff, 0px 0px 4px 2px #ffffff;
+}
+
+.dialogContent
+{
+    color: inherit;
+    overflow: auto;
+    width:100%;
+    height:100%;
+    left: 0px;
+    top: 32px;
+    position:absolute
+}
+
+.dialogContentBody
+{
+    color: inherit;
+    width:100%;
+    height:auto;
+    padding-top:24px;
+    padding-bottom:24px;
+    padding-left:24px;
+    padding-right:24px;
+    text-align: left;
+}
+
+.formButton
+{
+    font-weight:bold;
+	color:#ffffff;
+	border:none;
+    text-align:center;
+	background-color:#808080;
+    border-radius: 4px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:4px;
+	padding-bottom:4px;
+    cursor:pointer;
+    min-width:80px;
+    box-sizing: border-box;
+}
+.formInput {
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 4px;
+    border: none;
+}
+.formButton:hover {
+    background-color: #e0e0e0;
+}
+.formButton:disabled
+{
+	color:#b0b0b0;
+	background-color:#808080;
+}
+
+.formButtonSmall
+{
+    color:#ffffff;
+    border:none;
+    text-align:center;
+    background-color:#808080;
+    border-radius: 4px;
+    padding-left:2px;
+    padding-right:2px;
+    padding-top:2px;
+    padding-bottom:2px;
+    cursor:pointer;
+    min-width:40px;
+}
+
+.formButtonSmall:hover
+{
+    background-color: #e0e0e0;
+}
+
+.formButtonSmall:disabled
+{
+    color:#b0b0b0;
+    background-color:#808080;
+}
+
+.formButtonSmall.disabled2,
+.formButton.disabled2 { color:#b0b0b0; background-color:#808080; pointer-events: none; }
+
+.inputForm
+{
+    padding-left:2%;
+    padding-right:2%;
+    resize: none;
+    text-align: left;
+    background-color:#e0e0e0;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #808080;
+    color:inherit;
+    box-sizing: border-box;
+}
+
+.inputForm:focus
+{
+    border: 1px solid #AFCDD8;
+    background-color: #EBF2F4;
+}
+
+.transparentPannel
+{
+    background-color:rgba(64,64,64,0.1);
+    padding:16px;
+}
+
+.comment, .commentSelf, .commentNew
+{
+    border-radius: 4px;
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 6px;
+
+    padding: 14px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 32px auto 8px;
+    grid-template-rows: 1fr;
+    grid-gap:8px;
+}
+
+.comment:nth-child(even)
+{
+    background-color: rgba(64,64,64,0.1);
+}
+
+.comment:nth-child(odd)
+{
+    background-color: rgba(128,128,128,0.1);
+}
+
+.commentSelf
+{
+    background-color: rgba(240,160,64,0.1);
+}
+
+.commentNew
+{
+    padding-right: 0px;
+    grid-template-columns: 40px auto;
+}
+
+.commentContent
+{
+    vertical-align: top;
+    text-align: left;
+    word-break: break-all;
+    word-break: break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+}
+
+
+/* ----------------------- media resolutions ------------------------ */
+
+@media screen and (max-width:799px)
+{
+    div#header {flex-direction:column; }
+    #headerBlock1 { width:100%; }
+    #headerBlock2 { width:100%; justify-content: space-around;}
+    div#headerSearch {width:200px;}
+    input#mySearch { width:200px; left:21px; height:22px; border-radius:6px; padding-left:8px; padding-right:8px; }
+    .previewText { width:130px; }
+    .transparentPannel { padding:10px; }
+}
+
+@media screen and (min-width:800px) and (max-width:1279px)
+{
+    body { font-size: 9px; }
+    div#headerSearch {width: 250px;}
+    input#mySearch { width:250px; left:21px; height:22px; border-radius:6px; padding-left:8px; padding-right:8px; }
+    .previewText { width:130px; }
+    .transparentPannel { padding:11px; }
+}
+
+@media screen and (min-width:1280px) and (max-width:1439px)
+{
+    body { font-size: 10px; }
+    div#headerSearch {width: 300px;}
+    input#mySearch { width:300px; left:21px; height:22px; border-radius:6px; padding-left:8px; padding-right:8px; }
+    .dialogHeader { height:28px; }
+    .previewText { width:180px; }
+    .transparentPannel { padding:12px; }
+}
+
+@media screen and (min-width:1440px) and (max-width:1919px)
+{
+    div#headerSearch {width: 300px;}
+    input#mySearch { width:300px; left:21px; height:22px; border-radius:6px; padding-left:8px; padding-right:8px; }
+    .dialogHeader { height:28px; }
+    .previewText { width:180px; }
+    .transparentPannel { padding:12px; }
+}
+
+@media screen and (min-width:1920px) and (max-width:2559px)
+{
+    div#headerSearch {width: 300px;}
+    input#mySearch { width:300px; left:21px; height:22px; border-radius:6px; padding-left:8px; padding-right:8px; }
+    .dialogHeader { height:32px; }
+    .previewText { width:220px; }
+    .transparentPannel { padding:16px; }
+}
+
+@media screen and (min-width:2560px) 
+{
+    div#headerSearch {width: 300px;}
+    input#mySearch { width:300px; left:21px; height:22px; border-radius:6px; padding-left:8px; padding-right:8px; }
+    .dialogHeader { height:32px; }
+    .previewText { width:220px; }
+    .transparentPannel { padding:16px; }
+}
+body
+{
+    /* background-image: url("/img/themes/classic/background.jpg"); */
+}
+</style>
+
+<style>
+body
+{
+    background-color: #000000;
+    color: #c0c0c0;
+    font-size:12px;
+    font-style:normal;
+    font-family:Tahoma,Arial;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+    overflow:hidden;
+    position:absolute;
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+}
+
+div#player
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding:0;
+    margin:0;
+}
+
+div#playerInteraction
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding:0;
+    margin:0;
+}
+
+.playerCanvas
+{
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+div#noWebGL
+{
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+    border: 0px;
+    border-radius: 4px 4px 0px 0px;
+    background-color:#000000;
+    visibility: hidden;
+}
+
+img#noWebGL_ShaderImage
+{
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 0px;
+    border-radius: 4px 4px 0px 0px;
+}
+
+span#noWebGL_Text
+{
+    left:8px;
+    font-size: 1.5em;
+    border: 0px;
+    color:#ff0000;
+    position: absolute;
+}
+
+div#playerBar
+{
+    left: 0px;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color:rgba(0,0,0,0.8);
+    margin: 0px;
+    padding: 0px;
+
+    transition: bottom 1s;
+    -webkit-transition: bottom 1s; /* Safari */
+}
+
+div#playerBar.isVisible
+{
+    bottom:0px;
+}
+
+div#playerBar.isNotVisible
+{
+    bottom:-31px;
+}
+
+.myFull
+{
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.playerCanvas_full-screen,
+.playerCanvas:full-screen,
+.playerCanvas:fullscreen,
+.playerCanvas:-webkit-full-screen,
+.playerCanvas:-moz-full-screen
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
+div#shaderInfo
+{
+    background-color:rgba(0,0,0,0.8);
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+
+    transition: top 1s;
+    -webkit-transition: top 1s; /* Safari */
+}
+
+div#shaderInfo.isVisible
+{
+    top:0px;
+}
+div#shaderInfo.isNotVisible
+{
+    top:-31px;
+}
+
+a.shaderTitle
+{
+    font-size:18px;
+    font-style:normal;
+    font-weight:bold;
+    text-align: left;
+    color: #c0c0c0;
+    text-decoration: none;
+    margin-left:6px;
+    margin-right:6px;
+}
+
+a.shaderTitle:hover
+{
+  color : #ff8020;
+}
+
+
+div#shaderStats
+{
+    top: 8px;
+    right: 4px;
+    position: absolute;
+    padding-left:0;
+    padding-right:0;
+    margin-left:0;
+    margin-right:0;
+}
+
+div#shaderLike
+{
+    left: 0px;
+    top: 150px;
+    position: absolute;
+}
+
+a.shadertoyLink
+{
+    color:#c0c0c0;
+    font-size:16px;
+    font-style:normal;
+    font-weight:normal;
+    font-family:Lobster,Tahoma,Arial;
+    text-align: left;
+    top: 5px;
+    right: 6px;
+    position: absolute;
+    padding-left:0;
+    padding-right:0;
+    margin-left:0;
+    margin-right:0;
+    text-decoration:none;
+
+    user-select: text;
+    -moz-user-select: -moz-text;
+    -webkit-user-select: text;
+}
+a.shadertoyLink:hover
+{
+  color : #ff8020;
+}
+</style>
+
+    <script>var gShaderID="3ty3Dy";var gInvisIfFail=null;var gTime="10";var gShowGui=true;var gPaused=true;var gMuted=false;</script>
+
+    <script src="./piLibs.js?v=86"></script>
+    <script src="./effect.js?v=86"></script>
+    <script>"use strict"
+
+const kMaxCompileTime = 10.0;
+
+function iReportCrash(shaderID)
+{
+    let req = new XMLHttpRequest();
+    req.onload = function ()
+    {
+        let jsn = req.response;
+        if (jsn === null) return;
+        if (jsn.result === 0)
+        {
+            // yep
+        }
+    };
+    req.open("POST", "/shadertoy", true);
+    req.responseType = "json";
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    req.send( "s=" + shaderID + "&r=2" );
+}
+</script>
+    <script>"use strict";
+
+class SoundCloud 
+{
+    resolve(url, callback, errcallback) 
+    {
+        var url2 = "surl=" + url;
+        var mHttpReq = new XMLHttpRequest();
+        mHttpReq.open( "POST", "/shadertoy", true );
+        mHttpReq.responseType = "json";
+        mHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        mHttpReq.onload = function()
+        {
+            var jsn = mHttpReq.response;
+            if( jsn===null ) errcallback(0);
+            if( jsn.result!==0 )
+            {
+                callback(JSON.parse(jsn.soundcloud));
+            } else {
+                errcallback(0);
+            }
+        };
+        mHttpReq.onerror = function()
+        {
+            errcallback(0);
+        };
+        mHttpReq.send( url2 );
+    }
+}
+
+const SC = new SoundCloud();
+</script>
+    <script>"use strict"
+
+var gShaderToy = null;
+
+function ShaderToy( parentElement )
+{
+    if( parentElement===null ) return;
+
+    this.mAudioContext = null;
+    this.mCreated = false;
+    this.mHttpReq = null;
+    this.mEffect = null;
+    this.mTo = null;
+    this.mTOffset = gTime * 1000;
+    this.mCanvas = null;
+    this.mFpsFrame = 0;
+    this.mFpsTo = null;
+    this.mIsPaused = gPaused;
+    this.mForceFrame = true;
+    this.mInfo = null;
+    this.mCode = null;
+
+    this.mCanvas = document.getElementById("demogl");
+    this.mCanvas.tabIndex = "0";
+
+    var ww = parentElement.offsetWidth;
+    var hh = parentElement.offsetHeight;
+
+    var me = this;
+    this.mCanvas.width  = ww;
+    this.mCanvas.height = hh;
+
+    this.mHttpReq = new XMLHttpRequest();
+    this.mTo = getRealTime();
+    this.mTf = this.mTOffset;
+    this.mFpsTo = this.mTo;
+    this.mMouseIsDown = false;
+    this.mMouseOriX = 0;
+    this.mMouseOriY = 0;
+    this.mMousePosX = 0;
+    this.mMousePosY = 0;
+
+
+    // --- audio context ---------------------
+
+    this.mAudioContext = piCreateAudioContext();
+
+    if( this.mAudioContext==null )
+    {
+         //alert( "no audio!" );
+    }
+
+    this.mCanvas.onmousedown = function(ev)
+    {
+        var pos = piGetCoords( me.mCanvas );
+        me.mMouseOriX =                     (ev.pageX - pos.mX)*me.mCanvas.width/me.mCanvas.offsetWidth;
+        me.mMouseOriY = me.mCanvas.height - (ev.pageY - pos.mY)*me.mCanvas.height/me.mCanvas.offsetHeight;
+        me.mMousePosX = me.mMouseOriX;
+        me.mMousePosY = me.mMouseOriY;
+        me.mMouseIsDown = true;
+        if( me.mIsPaused ) me.mForceFrame = true;
+    }
+    this.mCanvas.onmousemove = function(ev)
+    {
+        if( me.mMouseIsDown )
+        {
+            var pos = piGetCoords( me.mCanvas );
+            me.mMousePosX =                     (ev.pageX - pos.mX)*me.mCanvas.width/me.mCanvas.offsetWidth;
+            me.mMousePosY = me.mCanvas.height - (ev.pageY - pos.mY)*me.mCanvas.height/me.mCanvas.offsetHeight;
+            if( me.mIsPaused ) me.mForceFrame = true;
+        }
+    }
+    this.mCanvas.onmouseup = function(ev)
+    {
+        me.mMouseIsDown = false;
+        me.mMouseOriX = -Math.abs( me.mMouseOriX );
+        me.mMouseOriY = -Math.abs( me.mMouseOriY );
+        if( me.mIsPaused ) me.mForceFrame = true;
+    }
+
+    this.mCanvas.onkeydown = function(ev)
+    {
+        me.mEffect.SetKeyDown( 0, ev.keyCode );
+        if( me.mIsPaused ) me.mForceFrame = true;
+    }
+    this.mCanvas.onkeyup = function(ev)
+    {
+        me.mEffect.SetKeyUp( 0, ev.keyCode );
+        if( me.mIsPaused ) me.mForceFrame = true;
+    }
+
+    document.getElementById("myResetButton").onclick = function( ev )
+    {
+        me.resetTime();
+    }
+    document.getElementById("myPauseButton").onclick = function( ev )
+    {
+        me.pauseTime();
+    }
+
+    this.mCanvas.ondblclick = function( ev )
+    {
+        if( piIsFullScreen()==false )
+        {
+            piRequestFullScreen( me.mCanvas );
+            me.mCanvas.focus(); // put mouse/keyboard focus on canvas
+        }
+        else
+        {
+            piExitFullScreen();
+        }
+    }
+
+    document.getElementById("myFullScreen").onclick = function( ev )
+    {
+        piRequestFullScreen( me.mCanvas );
+        me.mCanvas.focus(); // put mouse/keyboard focus on canvas
+    }
+
+    var resizeCB = function (xres, yres) { me.mForceFrame = true; };
+    var crashCB = function () { /*iReportCrash(gShaderID);*/ };
+    this.mEffect = new Effect(null, this.mAudioContext, this.mCanvas, this.RefreshTexturThumbail, this, gMuted, false, resizeCB, crashCB );
+    this.mCreated = true;
+
+}
+
+ShaderToy.prototype.startRendering = function()
+{
+    var me = this;
+
+    function renderLoop2()
+    {
+        requestAnimFrame( renderLoop2 );
+
+        if( me.mIsPaused && !me.mForceFrame )
+        {
+            me.mEffect.UpdateInputs( 0, false );
+            return;
+        }
+
+        me.mForceFrame = false;
+        var time = getRealTime();
+        var ltime = me.mTOffset + time - me.mTo;
+
+        if( me.mIsPaused ) ltime = me.mTf; else me.mTf = ltime;
+
+        var dtime = 1000.0 / 60.0;
+
+        me.mEffect.Paint(ltime/1000.0, dtime/1000.0, 60, me.mMouseOriX, me.mMouseOriY, me.mMousePosX, me.mMousePosY, me.mIsPaused );
+
+        me.mFpsFrame++;
+
+        document.getElementById("myTime").textContent = (ltime/1000.0).toFixed(2);
+        if( (time-me.mFpsTo)>1000 )
+        {
+            var ffps = 1000.0 * me.mFpsFrame / (time-me.mFpsTo);
+            document.getElementById("myFramerate").textContent = ffps.toFixed(1) + " fps";
+            me.mFpsFrame = 0;
+            me.mFpsTo = time;
+        }
+    }
+
+    renderLoop2();
+}
+
+//---------------------------------
+
+ShaderToy.prototype.Stop = function()
+{
+    document.getElementById("myPauseButton").style.background="url('/img/playEmbed.png')";
+    this.mIsPaused = true;
+    this.mEffect.StopOutputs();
+}
+
+ShaderToy.prototype.pauseTime = function()
+{
+    var time = getRealTime();
+    if( !this.mIsPaused )
+    {
+        this.Stop();
+     }
+    else
+    {
+        document.getElementById("myPauseButton").style.background="url('/img/pauseEmbed.png')";
+        this.mTOffset = this.mTf;
+        this.mTo = time;
+        this.mIsPaused = false;
+        this.mEffect.ResumeOutputs();
+        this.mCanvas.focus(); // put mouse/keyboard focus on canvas
+    }
+}
+
+ShaderToy.prototype.resetTime = function()
+{
+    this.mTOffset = 0;
+    this.mTo = getRealTime();
+    this.mTf = 0;
+    this.mFpsTo = this.mTo;
+    this.mFpsFrame = 0;
+    this.mForceFrame = true;
+    this.mEffect.ResetTime();
+    this.mCanvas.focus(); // put mouse/keyboard focus on canvas
+}
+
+
+ShaderToy.prototype.PauseInput = function( id )
+{
+    return this.mEffect.PauseInput( 0, id );
+}
+
+ShaderToy.prototype.MuteInput = function( id )
+{
+    return this.mEffect.MuteInput( 0, id );
+}
+
+ShaderToy.prototype.RewindInput = function( id )
+{
+    this.mEffect.RewindInput( 0, id );
+    this.mCanvas.focus(); // put mouse/keyboard focus on canvas
+}
+
+ShaderToy.prototype.SetTexture = function( slot, url )
+{
+    this.mEffect.NewTexture( 0, slot, url );
+}
+
+ShaderToy.prototype.RefreshTexturThumbail = function( myself, slot, img, forceFrame, gui, guiID, time )
+{
+  myself.mForceFrame = forceFrame;
+}
+
+ShaderToy.prototype.GetTotalCompilationTime = function()
+{
+    return this.mEffect.GetTotalCompilationTime();
+}
+
+ShaderToy.prototype.Load = function( jsn )
+{
+    try
+    {
+        var res = this.mEffect.Load( jsn, false );
+        this.mCode = res.mShader;
+
+        if( res.mFailed===false )
+        {
+            //this.resetTime();
+            this.mForceFrame = true;
+        }
+
+        this.mInfo = jsn.info;
+
+        return {
+            mFailed: false,
+                 mDate        : jsn.info.date,
+                 mViewed      : jsn.info.viewed,
+                 mName        : jsn.info.name,
+                 mUserName    : jsn.info.username,
+                 mDescription : jsn.info.description,
+                 mLikes       : jsn.info.likes,
+                 mPublished   : jsn.info.published,
+                 mHasLiked    : jsn.info.hasliked,
+                 mTags        : jsn.info.tags };
+
+    }
+    catch( e )
+    {
+        return { mFailed:true };
+    }
+}
+
+ShaderToy.prototype.Compile = function (onResolve)
+{
+    this.mEffect.Compile(true, onResolve);
+}
+
+function iCompileAndStart( viewerParent, jsnShader )
+{
+    gShaderToy = new ShaderToy( viewerParent, null );
+    if( !gShaderToy.mCreated )
+    {
+        if( gInvisIfFail!==null )
+        {
+          var div = document.createElement("img");
+          div.src = gInvisIfFail;
+          var root = document.getElementsByTagName( "body" )[0];
+          root.replaceChild( div, viewerParent );
+        }
+        return;
+    }
+
+    var gRes = gShaderToy.Load(jsnShader[0])
+    if (gRes.mFailed)
+    {
+        gShaderToy.pauseTime();
+        gShaderToy.resetTime();
+    }
+    else
+    {
+        let st = document.getElementById("shaderTitle");
+        let str = "<a class=\"shaderTitle\" target=\"_blank\" href=\"https://www.shadertoy.com/view/" + gShaderID + "\">" + htmlEntities(gRes.mName) + "</a>";
+        str += "<span>by " + htmlEntities(gRes.mUserName) + " in " + piGetTime(gRes.mDate) + "</span>";
+        st.innerHTML = str;
+
+        let shaderStats = document.getElementById("shaderStats");
+        shaderStats.innerHTML = "<img src='/img/viewsEmbed.png' class='viewsIcon'></img><span>" + gRes.mViewed + "</span>    &nbsp;&nbsp;  <img src='/img/likesEmbed.png' class='likesIcon'></img><span>" + gRes.mLikes + "</span>";
+
+
+        gShaderToy.Compile( function (worked)
+        {
+            if (!worked) return;
+
+            /*
+            let compilationTime = gShaderToy.GetTotalCompilationTime();
+            if (compilationTime > kMaxCompileTime)
+            {
+                iReportCrash(gShaderID);
+            }*/
+
+            if (gShaderToy.mIsPaused)
+            {
+                gShaderToy.Stop();
+            }
+
+            gShaderToy.startRendering();
+        });
+    }
+
+}
+
+function watchInit()
+{
+      //-- shadertoy --------------------------------------------------------
+    var viewerParent = document.getElementById("player");
+
+    if( gShowGui===false )
+    {
+        document.getElementById('shaderInfo').className='isNotVisible';
+        document.getElementById('playerBar').className='isNotVisible';
+    }
+
+    viewerParent.addEventListener( "mouseover", function(e)
+    {
+        document.getElementById('shaderInfo').className='isVisible';
+        document.getElementById('playerBar').className='isVisible';
+    }, true );
+
+    viewerParent.addEventListener( "mouseout", function(e)
+    {
+      var tt = e.relatedTarget || e.toElement;
+
+      //console.log( "OUT   t: " + e.target.id + "    ct: " + e.currentTarget.id + "    this: " + this.id + "    target: " + ((tt==null)?"none":tt.id) );
+      if( tt!==null ) return;
+
+      document.getElementById('shaderInfo').className='isNotVisible';
+      document.getElementById('playerBar').className='isNotVisible';
+    }, true );
+
+    document.body.addEventListener( "keydown", function(e)
+                                               {
+                                                     var ele = piGetSourceElement(e)
+                                                     if( e.keyCode===8 && ele===document.body )
+                                                         e.preventDefault();
+                                               } );
+
+
+    //-- get info --------------------------------------------------------
+
+    var httpReq = new XMLHttpRequest();
+    httpReq.open( "POST", "/shadertoy", true );
+    httpReq.responseType = "json";
+    httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    var str = "{ \"shaders\" : [\"" + gShaderID + "\"] }";
+    str = "s=" + encodeURIComponent(str) + "&nt=0&nl=0&np=0";;
+    httpReq.onload = function()
+    {
+        var jsnShader = [
+    {
+        "ver": "0.1",
+        "info": {
+            "id": "3ty3Dy",
+            "date": "1579704247",
+            "viewed": 3876,
+            "name": "Crowdy waves 2",
+            "username": "FabriceNeyret2",
+            "description": "refactored & commented version of rory618's \"Crowdy waves\" [url]https://shadertoy.com/view/ttyGWw[/url] (Voronoi particle tracking )\nSPACE: show Ids/voronoi   C mouse,+D,S,P\nAnother partic Voronoï tracker: [url]https://www.shadertoy.com/view/WtK3ztl[/url]",
+            "likes": 137,
+            "published": 3,
+            "flags": 48,
+            "usePreview": 0,
+            "tags": []
+        },
+        "renderpass": [
+            {
+                "inputs": [
+                    {
+                        "id": "4dXGRr",
+                        "filepath": "/presets/tex00.jpg",
+                        "previewfilepath": "/presets/tex00.jpg",
+                        "type": "keyboard",
+                        "channel": 3,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "4dXGR8",
+                        "filepath": "/media/previz/buffer00.png",
+                        "previewfilepath": "/media/previz/buffer00.png",
+                        "type": "buffer",
+                        "channel": 0,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "XsXGR8",
+                        "filepath": "/media/previz/buffer01.png",
+                        "previewfilepath": "/media/previz/buffer01.png",
+                        "type": "buffer",
+                        "channel": 1,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "4sXGR8",
+                        "filepath": "/media/previz/buffer02.png",
+                        "previewfilepath": "/media/previz/buffer02.png",
+                        "type": "buffer",
+                        "channel": 2,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    }
+                ],
+                "outputs": [
+                    {
+                        "id": "4dfGRr",
+                        "channel": 0
+                    }
+                ],
+                "code": "// Commented refactored fork of \"Crowdy waves\" by rory618. https://shadertoy.com/view/ttyGWw\n// All-in-one-buffer variant of the Voronoi particle tracking method: https://www.shadertoy.com/view/wlcXRS\n\n// more refs: https://www.shadertoy.com/results?query=voronoi%20particle%20tracking&sort=newest\n//            rory618's: https://www.shadertoy.com/user/rory618 [which one seminal ?]\n//            wyatt's: https://www.shadertoy.com/results?query=wyatt [which one seminal ?] https://www.shadertoy.com/view/MlVfDR\n//            https://www.shadertoy.com/view/4sK3WK\n// Another refactored/commented (very different) one: https://www.shadertoy.com/view/WtK3zt\n\nvoid mainImage( out vec4 O, vec2 I )\n{\n    O = keyFlip(32)\n        ? T1(I)/(R.x*R.y)*N    // space key: draw Id/Voronoi\n        : T2(I);               // draw trace\n}",
+                "name": "Image",
+                "description": "",
+                "type": "image"
+            },
+            {
+                "inputs": [
+                    {
+                        "id": "4dXGRr",
+                        "filepath": "/presets/tex00.jpg",
+                        "previewfilepath": "/presets/tex00.jpg",
+                        "type": "keyboard",
+                        "channel": 3,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "4dXGR8",
+                        "filepath": "/media/previz/buffer00.png",
+                        "previewfilepath": "/media/previz/buffer00.png",
+                        "type": "buffer",
+                        "channel": 0,
+                        "sampler": {
+                            "filter": "nearest",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "XsXGR8",
+                        "filepath": "/media/previz/buffer01.png",
+                        "previewfilepath": "/media/previz/buffer01.png",
+                        "type": "buffer",
+                        "channel": 1,
+                        "sampler": {
+                            "filter": "nearest",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    }
+                ],
+                "outputs": [
+                    {
+                        "id": "4dXGR8",
+                        "channel": 0
+                    }
+                ],
+                "code": "// === Physics: manage particles pos+V: advect & react\n// see also: Boids physics https://www.shadertoy.com/results?query=boids\n\nvoid mainImage( out vec4 O, vec2 I )\n{\n    O = T0(I);              // previous state\n    \n    O.xy = mod(O.xy,R);     // cyclical world\n  //vec4 r = rand4( int(I.x) + int(I.y)*2048 + iFrame*2048*2048);   // deterministic\n  //vec4 r = rand4( int(I.x) + int(I.y)*2048 + (int(iTime*2048.)+iFrame)*2048);\n    vec4 r = rand4( int(I.x) + int(I.y)*2141 + (int(iTime*2141.)+iFrame)*2141); // without 2048 bias\n    \n    if(iFrame<3)            // init: random location, random V , |V|= 1/4\n        O.xy = r.xy*R,\n        O.zw = .25*cos(TAU*(vec2(0,.25)+r.z));\n\n    \n#if 1                       // --- emulate pressure & viscosity (is also boids/schoolfish coeherence)\n    vec4 a = T1(O.xy);      // get the 4 ids in Voronoï buffer at particle location\n    vec2 ns = vec2(0),      //         (should be the closest)\n         df = vec2(0), D;\n    for(int i = 0; i < 4; i++){ \n        vec4 n = A(a[i]);\n        ns += n.zw/4.;      // average velocity\n        D = O.xy - n.xy;\n        D = mod( D + R/2., R ) - R/2.;\n                            // repulsed by nearby particles  \n        if( l2(D) > l2(.005) && l2(D) < l2(10.) )\n        \tdf += normalize(D)/(length(D)+.03);\n    }\n    O.zw += df/25.;         // pressure: apply repulsion force\n    O.zw = mix(O.zw,ns,.1); // visc: V = average Vpartic + relax(oldV+centering)\n#endif\n    \n    if(l2(O.zw) > l2(.001)) // |V| = 1/4 + relax(oldV)\n    \tO.zw = mix(O.zw, normalize(O.zw)/4.,.05);\n    \n    O.zw += randn(r.xy)/1e2; // --- add a bit of random force [init/resized=superimposed]\n\n    if(iMouse.z > 0.){         // --- mouse action on particles\n        vec2 D = O.xy-iMouse.xy, F = D;           // default: repulse\n        if keyDown(64+4 ) F = -D;                 // \"D\": drain\n        if keyDown(64+19) F = vec2( -D.y, D.x);   // \"S\": swirl\n        if keyDown(64+16) F = iMouse.xy-iMouse.zw;// \"P\": push\n        O.zw += normalize(F+1e-5)/(length(D)+.03);\n    }\n    O.xy += O.zw;  // pos += V  (indeed V contains dx/dt )\n    \n}",
+                "name": "Buffer A",
+                "description": "",
+                "type": "buffer"
+            },
+            {
+                "inputs": [
+                    {
+                        "id": "4dXGR8",
+                        "filepath": "/media/previz/buffer00.png",
+                        "previewfilepath": "/media/previz/buffer00.png",
+                        "type": "buffer",
+                        "channel": 0,
+                        "sampler": {
+                            "filter": "nearest",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "XsXGR8",
+                        "filepath": "/media/previz/buffer01.png",
+                        "previewfilepath": "/media/previz/buffer01.png",
+                        "type": "buffer",
+                        "channel": 1,
+                        "sampler": {
+                            "filter": "nearest",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    }
+                ],
+                "outputs": [
+                    {
+                        "id": "XsXGR8",
+                        "channel": 0
+                    }
+                ],
+                "code": "// === Voronoï buffer: manage tracking of particles Ids\n\n// --- insert (i,d) and maintain the 4 closest (i_,d_) \nvoid list_insert(inout vec4 i, inout vec4 d, float i_, float d_){\t\n    if(i_ == 0.) return;           // not a particle : exit\n    if(any(equal(vec4(i_),i))) return; // already in top4 : exit\n    if     (d_ < d[0])             // closer to closest: insert here\n        i = vec4(i_,i.xyz),    d = vec4(d_,d.xyz);\n    else if(d_ < d[1])             // closer to 2nd closest: insert here\n        i = vec4(i.x,i_,i.yz), d = vec4(d.x,d_,d.yz);\n    else if(d_ < d[2])             // closer to 3rd closest: insert here\n        i = vec4(i.xy,i_,i.z), d = vec4(d.xy,d_,d.z);\n    else if(d_ < d[3])             // closer to 4th closest: insert here\n        i = vec4(i.xyz,i_),    d = vec4(d.xyz,d_);\n}\n\nvoid mainImage( out vec4 O, vec2 I )\n{\n    vec4  i = vec4(0),\n         i0 = T1( I ),             // 4 closests particles here and around\n         ia = T1( I + vec2( 1, 0) ),  // NB: could use an array.\n         ib = T1( I + vec2( 0, 1) ),\n         ic = T1( I + vec2(-1, 0) ),\n         id = T1( I + vec2( 0,-1) );\n\n//#define dist(i) length( A(i).xy - I )\n//#define dist(i) length( mod( A(i).xy-I + R/2., R) - R/2. )  \nvec2 D;\n#define dist(i) ( D = mod( A(i).xy-I + R/2., R) - R/2., dot(D,D) )\n\n    vec4  d = vec4(1e9); \n    for(int k = 0; k < 4; k++){    // sorts all these\n        list_insert( i, d, i0[k], dist(i0[k]) );\n        list_insert( i, d, ia[k], dist(ia[k]) );\n        list_insert( i, d, ib[k], dist(ib[k]) );\n        list_insert( i, d, ic[k], dist(ic[k]) );\n        list_insert( i, d, id[k], dist(id[k]) );\n    }\n#if 0 // also checking diagonal (to test possibly axis bias)\n    ia = T1( I + vec2( 1, 1) ),\n    ib = T1( I + vec2(-1, 1) ),\n    ic = T1( I + vec2( 1,-1) ),\n    id = T1( I + vec2(-1,-1) );\n    for(int k = 0; k < 4; k++){    // sorts all these\n        list_insert( i, d, ia[k], dist(ia[k]) );\n        list_insert( i, d, ib[k], dist(ib[k]) );\n        list_insert( i, d, ic[k], dist(ic[k]) );\n        list_insert( i, d, id[k], dist(id[k]) );\n    }\n#endif\n    \n    for(int k = 0; k < 1; k++){    // try to re-insert some random particle (possibly escaped from tracking)\n      //int r = IHash( int(I.x) + int(I.y)*2048 + iFrame*2048*2048 +k*11131); //deterministic\n        int r = IHash( int(I.x) + int(I.y)*2141 + iFrame*2141*2141 +k*11131); //without 2048 bias\n      //int r = IHash( int(I.x) + int(I.y)*2048 + (int(iTime*2048.)+iFrame)*2048 +k*11131);\n        int i_ =  1 + r % ( int(R.x*R.y)/int(N) ); // [ why /10? ]\n        list_insert(i, d, float(i_), dist(i_) );\n    }\n    O = vec4(i);                   // stores 4 closest\n    \n}",
+                "name": "Buffer B",
+                "description": "",
+                "type": "buffer"
+            },
+            {
+                "inputs": [],
+                "outputs": [],
+                "code": "#define N 10. // use only 1/N % of the max Rx*Ry particles (for readability)\n\n// Buff B (1) store Voronoï tracking acceleration structure;\n//            xyzw: ids of 4 closest partics to buffer location\n// Buff A (0) stores particles: \n//            xy: position zw: velocity\n\n// --- translate particle id (in [1,Rx*Ry] ) to buffer pixel \n#define A(n) T0( vec2( (int(n)-1) % iR.x,      \\\n                       (int(n)-1) / iR.x ) +.5 )  // +.5 useless\n\n// --- utils\n                           \n#define R     iResolution.xy\n#define iR    ivec2(iResolution)\n#define T0(U) texelFetch( iChannel0, ivec2(U)   , 0 )\n#define T1(U) texelFetch( iChannel1, ivec2(U)%iR, 0 )\n#define T2(U) texelFetch( iChannel2, ivec2(U)   , 0 )\n\n#define l2(x) dot(x,x)\n\n#define TAU 6.2831853\n                           \n#define hue(v)  ( .6 + .6 * cos( 6.3*(v)  + vec4(0,23,21,0)  ) )\n                           \n// --- keyboard\n#define key(k,mode) ( texelFetch( iChannel3, ivec2(k,mode), 0 ).x > .5 )\n#define keyDown(k) key(k,0)\n#define  keyHit(k) key(k,1)\n#define keyFlip(k) key(k,2)\n\n\n// --- random numbers\n\nint IHash(int a){\n\ta = (a ^ 61) ^ (a >> 16);\n\ta = a + (a << 3);\n\ta = a ^ (a >> 4);\n\ta = a * 0x27d4eb2d;\n\ta = a ^ (a >> 15);\n\treturn a;\n}\n\n#define Hash(a) ( float(IHash(a)) / float(0x7FFFFFFF) ) // Uniform in [0,1]\n\nvec4 rand4(int seed){\n    return vec4(Hash(seed^0x34F85A93),\n                Hash(seed^0x85FB93D5),\n                Hash(seed^0x6253DF84),\n                Hash(seed^0x25FC3625));\n}\n\n// --- normal law random generator\nvec2 randn(vec2 r){ // r: randuniform\n    r.x = sqrt( -2.* log(1e-9+abs(r.x)));\n    r.y *= TAU;\n    return r.x * vec2(cos(r.y),sin(r.y));\n}\n",
+                "name": "Common",
+                "description": "",
+                "type": "common"
+            },
+            {
+                "inputs": [
+                    {
+                        "id": "4dXGRr",
+                        "filepath": "/presets/tex00.jpg",
+                        "previewfilepath": "/presets/tex00.jpg",
+                        "type": "keyboard",
+                        "channel": 3,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "4dXGR8",
+                        "filepath": "/media/previz/buffer00.png",
+                        "previewfilepath": "/media/previz/buffer00.png",
+                        "type": "buffer",
+                        "channel": 0,
+                        "sampler": {
+                            "filter": "nearest",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "XsXGR8",
+                        "filepath": "/media/previz/buffer01.png",
+                        "previewfilepath": "/media/previz/buffer01.png",
+                        "type": "buffer",
+                        "channel": 1,
+                        "sampler": {
+                            "filter": "nearest",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    },
+                    {
+                        "id": "4sXGR8",
+                        "filepath": "/media/previz/buffer02.png",
+                        "previewfilepath": "/media/previz/buffer02.png",
+                        "type": "buffer",
+                        "channel": 2,
+                        "sampler": {
+                            "filter": "linear",
+                            "wrap": "clamp",
+                            "vflip": "true",
+                            "srgb": "false",
+                            "internal": "byte"
+                        },
+                        "published": 1
+                    }
+                ],
+                "outputs": [
+                    {
+                        "id": "4sXGR8",
+                        "channel": 0
+                    }
+                ],
+                "code": "// === draw + blend with fading past\n\nvoid mainImage( out vec4 O, vec2 I )\n{\n    O = vec4(0);\n    vec4 a = T1(I), P;         // 4 particule id (supposed to be particles closest to I)\n    \n    for(int i = 0; i < 4; i++) // draw Gaussian blobs\n        P = A(a[i]),\n        O += .4* exp( -.5* l2( I - P.xy ) ) \n               * ( keyFlip(64+3) ? hue( length(P.zw) ) : vec4(1));\n\n    O = mix(O, T2(I), .9);     // blend with fading past\n  //O = mix(O, texture(iChannel2,-.01+1.02*I/R), .9); // false-3D variant\n}",
+                "name": "Buffer C",
+                "description": "",
+                "type": "buffer"
+            }
+        ]
+    }
+];
+        console.log(jsnShader)
+
+
+        if (jsnShader[0].info.usePreview === 1)
+        {
+            let url = "/media/shaders/" + gShaderID + ".jpg";
+            var img = new Image();
+            img.style = "width:100%;";
+            img.onload = function ()
+            {
+                viewerParent.appendChild(img);
+            };
+            img.onerror = function (ev) { iCompileAndStart(viewerParent,jsnShader); };
+            img.src = url;
+        }
+        else
+        {
+            iCompileAndStart(viewerParent,jsnShader);
+        }
+
+
+        setTimeout(()=>{
+    document.getElementById("body").style.opacity = ""
+    document.getElementById("demogl").style.opacity = ""
+},50)
+
+setTimeout(()=>{
+    gShaderToy.pauseTime()
+   
+},60)
+
+    }
+    httpReq.send( str  )
+
+}
+
+
+
+
+
+
+</script>
+</head>
+
+<body onload="watchInit()" id="body" style="opacity:0;">
+
+<!-- content ================================================================================== -->
+
+<div id="player">
+    <canvas id="demogl" style="opacity:0;" class="playerCanvas"></canvas>
+    <div id="noWebGL"><img id="noWebGL_ShaderImage"></img><span id="noWebGL_Text">No WebGL available :(</span></div>
+
+
+    <div id="shaderInfo">
+        <div   id="shaderTitle"></div>
+        <div   id="shaderStats"></div>
+    </div>
+
+    <div id="playerBar">
+          <div id="myResetButton" class="uiButton" title="reset time"      style="left: 16px;top:4px;cssFloat:left;background:url('/img/rewindEmbed.png');"></div>
+          <div id="myPauseButton" class="uiButton" title="pause/resume"    style="left: 44px;top:4px;cssFloat:left;background:url('/img/playEmbed.png');"></div>
+          <span id="myTime"                                                style="left: 88px;top:6px;position:absolute;margin:0px;padding:0px;font:italic normal 14px arial,serif">0</span>
+          <span id="myFramerate"                                           style="left:164px;top:6px;position:absolute;margin:0px;padding:0px;font:italic normal 14px arial,serif">0 fps</span>
+          <a class="shadertoyLink" href="https://www.shadertoy.com" target="_blank">Shadertoy</a>
+          <div id="myFullScreen"  class="uiButton" title="go full screen!" style="right:80px;top:4px;cssFloat:left;background:url('/img/fullscreenEmbed.png');"></div>
+    </div>
+</div>
+
+<div class="bodytext">
+    <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="156" viewBox="0 0 1200 156" fill="none" id="svg">
+        <path d="M0 151.787V3.9485H41.0005V151.787H0Z" fill="black"/>
+        <path d="M55.6319 151.787V3.9485H104.123L195.389 105.464H198.74V3.9485H238.163V151.787H189.278L98.2094 49.4827H95.2526V151.787H55.6319Z" fill="black"/>
+        <path d="M252.75 151.787V3.9485H413.401V39.0355H292.371V63.4781H400.785V97.7766H292.371V151.787H252.75Z" fill="black"/>
+        <path d="M425.806 151.787V3.9485H591.187V38.6413H465.426V62.0983H579.952V93.6372H465.426V117.094H594.144V151.787H425.806Z" fill="black"/>
+        <path d="M607.331 151.787V3.9485H737.035C770.939 3.9485 789.271 19.1266 789.271 46.7231C789.271 67.0263 780.204 77.6706 761.477 81.4159V83.5842C780.401 85.9496 788.877 99.3536 788.877 120.051C788.877 132.272 789.665 139.763 791.242 151.787H751.621C750.045 146.071 749.65 137.2 749.65 121.628C749.65 104.479 744.328 100.733 729.938 100.733H646.952V151.787H607.331ZM646.952 69.3917H727.376C741.371 69.3917 746.694 64.858 746.694 52.2424C746.694 39.824 741.174 35.2903 726.982 35.2903H646.952V69.3917Z" fill="black"/>
+        <path d="M804.257 151.787V3.9485H852.748L944.013 105.464H947.364V3.9485H986.788V151.787H937.902L846.834 49.4827H843.877V151.787H804.257Z" fill="black"/>
+        <path d="M1105.97 119.854C1144.61 119.854 1157.42 108.421 1157.42 77.8677C1157.42 47.3145 1144.61 35.8816 1106.17 35.8816H1093.36C1054.72 35.8816 1042.31 47.5116 1042.31 77.8677C1042.31 108.224 1055.32 119.854 1093.16 119.854H1105.97ZM999.728 77.4735C999.728 27.7998 1027.32 0.400391 1091.19 0.400391H1108.34C1172.01 0.400391 1200 28.3911 1200 77.8677C1200 127.541 1172.4 155.335 1108.34 155.335H1090.99C1027.72 155.335 999.728 126.95 999.728 77.4735Z" fill="black"/>
+        </svg>
+    </div>
+    <div id="firsttext">
+        
+        Decentralized technology is a way of ..... Bitcoin Ipsum Bitcoin ipsum dolor sit amet. Whitepaper double-spend problem miner, Bitcoin Improvement Proposal electronic cash Bitcoin Improvement Proposal, Merkle Tree. Decentralized stacking sats decentralized stacking sats block reward inputs soft fork. Difficulty Bitcoin Bitcoin Ipsum Bitcoin ipsum dolor sit amet. Whitepaper double-spend problem miner, Bitcoin Improvement Proposal electronic cash Bitcoin Improvement Proposal, Merkle Tree. Decentralized stacking sats decentralized stacking sats block reward inputs soft fork. Difficulty Bitcoin 
+    </div>
+
+</div>
+
+<img src="./backgroundimg.png" class="bodyImg">
+
+
+
+<!-- <video src="./alexguevara.webm" autoplay muted loop id="video">
+
+</video> -->
+
+<script>
+    // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    // ga('create', 'UA-44068895-1', 'shadertoy.com');
+    // ga('send', 'pageview');
+</script>
+
+<style>
+#firsttext{
+    width: calc(100vw - 80px - 243px);
+    margin-left: 25px;
+}
+
+    .bodyImg{
+        position: absolute;
+    z-index: 598;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    top: 0px;
+    filter: brightness(0.5);
+    }
+
+.bodytext{
+    position: absolute;
+    color: white;
+    width: calc(100vw - 80px);
+    height: fit-content;
+    margin-top: calc( 50vh - 80px );
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 40px;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    z-index: 998;
+}
+
+#svg{
+    filter:invert(1);
+    width: 200px;
+    height: 40px;
+}
+
+    #demogl{
+        filter: brightness(0.8) blur(5px) hue-rotate(-201deg);
+    cursor: default;
+    mix-blend-mode: difference;
+    z-index: 999;
+    position: absolute;
+    /* display: none;*/
+    }
+
+
+#video{
+    position: absolute;
+    z-index: 998;
+    width: 100vw;
+    height: 100vh;
+    pointer-events:none;
+
+}
+
+    #shaderInfo{
+        display: none;
+    }
+
+    #playerBar{
+        display: none;
+    }
+
+    #body{
+        background-color: black;
+    }
+
+
+</style>
+</body>
+</html>
